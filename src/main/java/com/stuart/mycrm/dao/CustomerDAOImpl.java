@@ -54,11 +54,11 @@ public class CustomerDAOImpl implements CustomerDAO {
         if (searchNameIsValid(searchName)) {
             query = session.createQuery(
                     "from Customer " +
-                            "where lower(firstName) like :theName " +
-                            "or lower(lastName) like :theName " +
+                            "where lower(firstName) like :searchName " +
+                            "or lower(lastName) like :searchName " +
                             "order by lastName",
                     Customer.class);
-            query.setParameter("theName", "%" + searchName.toLowerCase() + "%");
+            query.setParameter("searchName", "%" + searchName.toLowerCase() + "%");
 
         } else {
             query = getAllCustomersSortedByLastName(session);

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +19,12 @@
 
 <div id="container">
     <div id="content">
-        <input type="button" value="Add Customer"
-               onclick="window.location.href='showFormForAdd'; return false;"
-               class="add-button"
-        />
+        <security:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
+            <input type="button" value="Add Customer"
+                   onclick="window.location.href='showFormForAdd'; return false;"
+                   class="add-button"
+            />
+        </security:authorize>
 
         <!--  add a search box -->
         <form:form action="search" method="GET">
@@ -38,7 +41,9 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Action</th>
+                <security:authorize access="hasAnyRole('MANAGER','ADMIN')">
+                    <th scope="col">Action</th>
+                </security:authorize>
             </tr>
             <c:forEach var="tempCustomer" items="${customers}">
 
@@ -59,12 +64,16 @@
 
                     <td>
                         <!-- display update|delete link -->
-                        <a href="${updateLink}">Update</a>
-                        |
-                        <a href="${deleteLink}"
-                           onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">
-                            Delete
-                        </a>
+                        <security:authorize access="hasAnyRole('MANAGER','ADMIN')">
+                            <a href="${updateLink}">Update</a>
+                            <security:authorize access="hasAnyRole('ADMIN')">
+                            |
+                                <a href="${deleteLink}"
+                                   onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">
+                                    Delete
+                                </a>
+                            </security:authorize>
+                        </security:authorize>
                     </td>
                 </tr>
             </c:forEach>

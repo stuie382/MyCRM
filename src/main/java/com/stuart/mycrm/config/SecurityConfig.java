@@ -51,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/showMyLoginPage")
-                .loginProcessingUrl("/authenticateTheUser")
-                .permitAll()
+                .loginProcessingUrl("/authenticateTheUser").permitAll()
+                .defaultSuccessUrl("/home", true)
                 .and()
                 // default endpoint is /logout
                 .logout().permitAll()

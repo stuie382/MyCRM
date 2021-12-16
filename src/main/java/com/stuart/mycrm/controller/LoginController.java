@@ -17,4 +17,9 @@ public class LoginController {
     public String showAccessDenied() {
         return ("access-denied");
     }
+
+    @GetMapping("/home")
+    public String showHome(){
+        return "home";
+    }
 }

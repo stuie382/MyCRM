@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <title>MyCRM System</title>
+
 </head>
 <body>
 <h2>Company home page</h2>

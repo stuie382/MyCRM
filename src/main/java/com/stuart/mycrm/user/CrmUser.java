@@ -11,7 +11,7 @@ public class CrmUser {
 
     @NotNull(message = "is required")
     @Size(min = 1, message = "is required")
-    private String password;
+    private CharSequence password;
 
     public CrmUser() {
 
@@ -25,11 +25,11 @@ public class CrmUser {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public CharSequence getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password =password;
     }
 }

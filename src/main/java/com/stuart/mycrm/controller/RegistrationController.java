@@ -2,12 +2,10 @@ package com.stuart.mycrm.controller;
 
 import com.stuart.mycrm.user.CrmUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.PassThroughSourceExtractor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
@@ -38,9 +36,7 @@ public class RegistrationController {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
@@ -60,17 +56,12 @@ public class RegistrationController {
             Model theModel) {
 
         String userName = theCrmUser.getUserName();
-
         logger.info(() -> "Processing registration form for: " + userName);
-
         // form validation
         if (theBindingResult.hasErrors()) {
-
             theModel.addAttribute("crmUser", new CrmUser());
             theModel.addAttribute("registrationError", "User name/password can not be empty.");
-
             logger.warning("User name/password can not be empty.");
-
             return "registration-form";
         }
 
@@ -88,9 +79,6 @@ public class RegistrationController {
 
         // encrypt the password
         String encodedPassword = passwordEncoder.encode(theCrmUser.getPassword());
-
-        // prepend the encoding algorithm id
-        encodedPassword = "{bcrypt}" + encodedPassword;
 
         // give user default role of "employee"
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");

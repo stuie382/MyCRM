@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
 
 <head>
 	<title>luv2code - Access Denied</title>
@@ -10,7 +12,7 @@
 
 	<hr>
 	
-	<a href="${pageContext.request.contextPath}/">Back to Home Page</a>
+	<a href="${pageContext.request.contextPath}/showMyLoginPage">Back to Log In Page</a>
 	
 </body>
 

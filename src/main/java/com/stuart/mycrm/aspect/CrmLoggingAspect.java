@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 @Component
 public class CrmLoggingAspect {
 
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Pointcut("execution(* com.stuart.mycrm.controller.*.*(..))")
     private void forControllerPackage() {
